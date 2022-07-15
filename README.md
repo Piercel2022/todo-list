@@ -16,9 +16,9 @@ To get a local copy up and running follow these simple example steps.
 ### Using it Locally
 - Clone the project from GitHub [here](https://github.com/Piercel2022/todo-list)
 - Run the following commands as listed in your terminal:
-- `npm install`
-- `npm run build`
-- `npm start`
+- `npm install` to install dependencies from the package.json
+- `npm run build` to build or compile the project
+- `npm start` to start the webpack server
 
 ## Visit And Open Files
 
