@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <link  type="text/css" href="./style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<script defer src="/To-Do-List/bundle.js"></script></head>
+
+<body>
+        <section class="container">
+            <div class="heading-box">
+                <h3 class="container-heading">Today's To Do</h3>
+                <i class="fas fa-sync-alt"></i>
+            </div>
+            <div class="input-box">
+                <form class="input-form" id="form">
+                    <input type="text" class="input-task" id="task" placeholder="Add to your List...">
+                    <button type="submit" class="submit-task" id="enter-task"><i class="fas fa-reply"></i></button>
+                </form>
+            </div>
+            <div class="list" id="all-tasks"></div>
+            <button class="btn-completed" type="button" id="all-completed">Clear all completed</button>
+        </section>
+    <script defer src="../dist/bundle.js"></script>
+</body>
+
+</html>
