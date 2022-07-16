@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Piercel2022/todo-list/issues"
   },
-  "homepage": "https://github.com/Piercel2022/todo-list#readme",
+  "homepage": "https://piercel2022.github.io/todo-list/",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
