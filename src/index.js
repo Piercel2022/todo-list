@@ -5,7 +5,6 @@ import addTaskList from './add-items';
 
 const allTasks = document.getElementById('all-tasks');
 const insert = document.getElementById('enter-task');
-
 const removeAll = document.getElementById('all-completed');
 
 // eslint-disable-next-line prefer-const
