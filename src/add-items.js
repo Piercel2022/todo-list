@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import displayTasks from './index';
+import displayTasks from './index.js';
 
 const addTask = document.getElementById('task');
 const form = document.getElementById('form');

@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-cycle
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// eslint-disable-next-line import/no-cycle
+const HtmlWebpackPlugin = require('./src/index.html');
 
 module.exports = {
   mode: 'development',
