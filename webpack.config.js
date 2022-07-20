@@ -1,7 +1,5 @@
-// eslint-disable-next-line import/no-cycle
 const path = require('path');
-// eslint-disable-next-line import/no-cycle
-const HtmlWebpackPlugin = require('./src/index.html');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -19,7 +17,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-    publicPath: '/To-Do-List/',
+    publicPath: '/todo-list/',
   },
   module: {
     rules: [
@@ -29,4 +27,4 @@ module.exports = {
       },
     ],
   },
-};
+}
