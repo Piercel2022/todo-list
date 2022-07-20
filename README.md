@@ -20,6 +20,9 @@ To get a local copy up and running follow these simple example steps.
 - `npm run build` to build or compile the project
 - `npm start` to start the webpack server
 
+# Live Demo
+[here](https://piercel2022.github.io/todo-list/dist)
+
 ## Visit And Open Files
 
 [Visit Repo](https://github.com/Piercel2022/todo-list)
