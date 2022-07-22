@@ -10,7 +10,7 @@
     "test": "jest",
     "start": "webpack serve --open",
     "build": "webpack",
-    "deploy": "gh-pages -d dist"
+    "deploy": "main -d dist"
   },
   "repository": {
     "type": "git",
