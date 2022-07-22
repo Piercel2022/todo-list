@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/piercel2022/todo-list/issues"
   },
-  "homepage": " https://piercel2022.github.io/todo-list/",
+  "homepage": "",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.15.0",
     "css-loader": "^6.2.0",
