@@ -1,7 +1,6 @@
-import './style.css';
-import completedStatus from './script.js';
+const completedStatus = require('./script.js');
 // eslint-disable-next-line import/no-cycle
-import addTaskList from './add-items.js';
+const addTaskList = require('./add-items.js');
 
 const allTasks = document.getElementById('all-tasks');
 const insert = document.getElementById('enter-task');
