@@ -1,124 +1,127 @@
-const completedStatus = require('./script.js');
-// eslint-disable-next-line import/no-cycle
-const addTaskList = require('./add-items.js');
+import { isComp, checkBox } from './script';
+import {
+  listUpdate, addToDo, clearAll, clearAllComp, itemDelete, capitalize,
+} from './addremove';
+import './style.css';
 
-const allTasks = document.getElementById('all-tasks');
-const insert = document.getElementById('enter-task');
-const removeAll = document.getElementById('all-completed');
+let dataList = [];
 
-// eslint-disable-next-line prefer-const
-let taskList = [];
-
-const getData = () => {
-  if (localStorage.getItem('taskList') !== null) {
-    taskList = JSON.parse(localStorage.getItem('taskList'));
+const index = (dataList) => {
+  for (let i = 0; i < dataList.length; i++) { /* eslint-disable-line no-plusplus */
+    dataList[i].index = i + i;
   }
+
+  return dataList;
 };
 
-const displayTasks = () => {
-  if (localStorage.getItem('taskList') !== null) {
-    taskList = JSON.parse(localStorage.getItem('taskList'));
+const saveToLocalStorage = (dataList) => {
+  localStorage.setItem('todo_list', JSON.stringify(dataList));
+};
 
-    allTasks.innerHTML = '';
-    for (let i = 0; i < taskList.length; i += 1) {
-      const each = taskList[i];
+const refreshPage = () => {
+  window.location.reload();
+};
 
-      const eachTask = document.createElement('div');
-      eachTask.className = 'eachTask';
+const component = () => {
+  const todoContainer = document.querySelector('.todo-list-con');
+  let element = document.createElement('li');
+  element.className = 'todo-item';
 
-      const list = document.createElement('div');
-      list.className = 'group-list';
+  const heading = document.createElement('h2');
+  heading.className = 'heading';
+  heading.textContent = 'Today\'s To Do';
+  element.appendChild(heading);
 
-      const input = document.createElement('input');
-      input.setAttribute('type', 'checkbox');
-      input.setAttribute('class', 'check-box');
-      input.id = each.id;
-      input.checked = each.completed;
-      // eslint-disable-next-line no-loop-func
-      input.addEventListener('change', () => {
-        completedStatus(each, taskList);
-      });
-      list.appendChild(input);
-      eachTask.appendChild(list);
+  const clear = document.createElement('button');
+  clear.className = 'clear';
+  clear.innerHTML = '<i class=\'sync alternate icon\'></i>';
+  element.appendChild(clear);
+  todoContainer.appendChild(element);
 
-      const inputLabel = document.createElement('input');
-      inputLabel.value = each.description;
-      inputLabel.setAttribute('type', 'text');
-      inputLabel.className = 'form-label';
-      inputLabel.contentEditable = true;
-      list.appendChild(inputLabel);
-      eachTask.appendChild(list);
-      const button = document.createElement('i');
-      button.classList.add('fas', 'fa-ellipsis-v');
-      eachTask.appendChild(button);
-      const trash = document.createElement('div');
-      trash.innerHTML = '<i class="fas fa-trash-alt"></i>';
-      trash.setAttribute('class', 'bin');
-      trash.style.display = 'none';
-      eachTask.appendChild(trash);
+  clearAll(clear, dataList, saveToLocalStorage, refreshPage);
 
-      // eslint-disable-next-line no-loop-func
-      inputLabel.addEventListener('blur', () => {
-        inputLabel.style.background = '#ffffff';
-        eachTask.style.background = '#ffffff';
-        button.style.display = 'inline';
-        trash.style.display = 'none';
-        const newValue = inputLabel.value;
-        // eslint-disable-next-line no-use-before-define
-        edit(newValue, taskList, i);
-      });
+  element = document.createElement('li');
+  element.className = 'todo-item';
 
-      inputLabel.addEventListener('focus', () => {
-        inputLabel.style.background = '#90EE90';
-        eachTask.style.background = '#90EE90';
-        button.style.display = 'none';
-        trash.style.display = 'inline';
-      });
-      // eslint-disable-next-line no-loop-func
-      trash.addEventListener('mousedown', () => {
-        // eslint-disable-next-line no-use-before-define
-        removeTask(taskList, i);
-      });
-      allTasks.appendChild(eachTask);
+  const addItem = document.createElement('input');
+  addItem.className = 'add-item';
+  addItem.placeholder = 'Add to your list';
+  addItem.value = '';
+  element.appendChild(addItem);
+
+  const btn = document.createElement('button');
+  btn.className = 'enter-button';
+  btn.innerHTML = '<i class=\'level down alternate icon\'></i>';
+  element.appendChild(btn);
+  todoContainer.appendChild(element);
+
+  addItem.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      addToDo(addItem.value, dataList);
+      saveToLocalStorage(dataList);
+      refreshPage();
     }
-  } else {
-    localStorage.setItem('taskList', JSON.stringify(taskList));
-    getData();
-  }
-};
-
-const removeTask = (taskList, index) => {
-  taskList.splice(index, 1);
-  for (let j = 0; j < taskList.length; j += 1) {
-    taskList[j].id = j + 1;
-  }
-  localStorage.setItem('taskList', JSON.stringify(taskList));
-  displayTasks();
-};
-
-removeAll.addEventListener('click', () => {
-  taskList = taskList.filter((task) => !task.completed);
-  let reset = 0;
-  taskList.forEach((task) => {
-    reset += 1;
-    task.id = reset;
   });
-  localStorage.setItem('taskList', JSON.stringify(taskList));
-  displayTasks();
-});
 
-insert.addEventListener('click', (e, taskList) => {
-  if (localStorage.getItem('taskList') !== null) {
-    taskList = JSON.parse(localStorage.getItem('taskList'));
+  btn.addEventListener('click', () => {
+    addToDo(addItem.value, dataList);
+    saveToLocalStorage(dataList);
+    refreshPage();
+  });
+
+  if (dataList.length !== 0) {
+    dataList.forEach((todo) => {
+      element = document.createElement('li');
+      element.className = 'todo-item';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.className = 'checkbox';
+      checkbox.checked = todo.completed;
+      element.appendChild(checkbox);
+
+      const description = document.createElement('textarea');
+      description.className = 'description';
+      description.rows = 'auto';
+      description.value = capitalize(todo.description);
+      element.appendChild(description);
+
+      const taskButton = document.createElement('button');
+      taskButton.className = 'task-button';
+      taskButton.innerHTML = '<i class=\'ellipsis vertical icon\'></i>';
+      element.appendChild(taskButton);
+
+      checkBox(checkbox, todo, dataList, saveToLocalStorage, refreshPage);
+      isComp(todo.completed, description);
+
+      todoContainer.appendChild(element);
+    });
   }
-  e.preventDefault();
-  addTaskList(taskList);
-});
-const edit = (newValue, taskList, i) => {
-  taskList[i].description = newValue;
-  localStorage.setItem('taskList', JSON.stringify(taskList));
+
+  listUpdate(dataList, saveToLocalStorage, refreshPage);
+
+  itemDelete(dataList, index, saveToLocalStorage, refreshPage);
+
+  element = document.createElement('li');
+
+  const clearCompleted = document.createElement('button');
+  clearCompleted.className = 'clear-completed';
+  clearCompleted.innerHTML = 'Clear all completed';
+  element.appendChild(clearCompleted);
+  todoContainer.appendChild(element);
+
+  clearAllComp(clearCompleted, dataList, index, saveToLocalStorage, refreshPage);
 };
 
-export default displayTasks;
+const pageLoad = () => {
+  window.onload = () => {
+    if (localStorage.getItem('todo_list') !== null) {
+      dataList = JSON.parse(localStorage.getItem('todo_list'));
+      component();
+    } else {
+      component();
+    }
+  };
+};
 
-window.onload = displayTasks();
+pageLoad();
