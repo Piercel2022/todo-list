@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/Piercel2022/todo-list/issues"
   },
-  "homepage": "https://piercel2022.github.io/todo-list/dist",
+  "homepage": "https://piercel2022.github.io/todo-list",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.15.0",
     "babel-eslint": "^10.1.0",
