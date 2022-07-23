@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/Piercel2022/todo-list/issues"
   },
-  "homepage": "https://piercel2022.github.io/todo-list",
+  "homepage": "https://piercel2022.github.io/todo-list/dist/",
   "devDependencies": {
     "css-loader": "^6.4.0",
     "html-webpack-plugin": "^5.5.0",
